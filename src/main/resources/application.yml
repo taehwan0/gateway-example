@@ -10,14 +10,20 @@ eureka:
 spring:
   application:
     name: gateway-service
-#  cloud:
-#    gateway:
-#      routes:
-#        - id: first-service
-#          uri: http://localhost:8001
-#          predicates:
-#            - Path=/first-service/**
-#        - id: second-service
-#          uri: http://localhost:8002
-#          predicates:
-#            - Path=/second-service/**
+  cloud:
+    gateway:
+      routes:
+        - id: first-service
+          uri: http://localhost:8001
+          predicates:
+            - Path=/first-service/**
+          filters:
+            - AddRequestHeader=first-request, first-request-values-by-yml
+            - AddResponseHeader=first-response, first-response-values-by-yml
+        - id: second-service
+          uri: http://localhost:8002
+          predicates:
+            - Path=/second-service/**
+          filters:
+            - AddRequestHeader=second-request, first-request-second-by-yml
+            - AddResponseHeader=second-response, first-response-second-by-yml
