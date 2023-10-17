@@ -12,6 +12,12 @@ spring:
     name: gateway-service
   cloud:
     gateway:
+      default-filters:
+        - name: GlobalFilter
+          args:
+            baseMessage: SpringCloudGlobalFilterBaseMessage
+            preLogger: true
+            postLogger: true
       routes:
         - id: first-service
           uri: http://localhost:8001
